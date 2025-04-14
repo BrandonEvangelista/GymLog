@@ -8,6 +8,12 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/textView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="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" />
+
+    <TextView
         android:id="@+id/logDisplayTextView"
         android:layout_width="374dp"
         android:layout_height="200dp"
