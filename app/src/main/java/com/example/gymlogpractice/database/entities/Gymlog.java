@@ -1,11 +1,9 @@
-package com.example.gymlogpractice.Database.entities;
+package com.example.gymlogpractice.database.entities;
 
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 
-import org.jspecify.annotations.NonNull;
-
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 @Entity(tableName = "gymLogTable")
@@ -13,19 +11,19 @@ public class Gymlog {
     @PrimaryKey(autoGenerate = true)
     private int id;
 
-    private String excercise;
+    private String exercise;
 
     private double weight;
 
     private int reps;
 
-    private LocalDate date;
+    private LocalDateTime date;
 
-    public Gymlog(String excercise, double weight, int reps) {
-        this.excercise = excercise;
+    public Gymlog(String exercise, double weight, int reps) {
+        this.exercise = exercise;
         this.weight = weight;
         this.reps = reps;
-        date = LocalDate.now();
+        date = LocalDateTime.now();
     }
 
     @Override
@@ -33,12 +31,12 @@ public class Gymlog {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Gymlog gymlog = (Gymlog) o;
-        return id == gymlog.id && Double.compare(weight, gymlog.weight) == 0 && reps == gymlog.reps && Objects.equals(excercise, gymlog.excercise) && Objects.equals(date, gymlog.date);
+        return id == gymlog.id && Double.compare(weight, gymlog.weight) == 0 && reps == gymlog.reps && Objects.equals(exercise, gymlog.exercise) && Objects.equals(date, gymlog.date);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, excercise, weight, reps, date);
+        return Objects.hash(id, exercise, weight, reps, date);
     }
 
     public int getId() {
@@ -49,12 +47,12 @@ public class Gymlog {
         this.id = id;
     }
 
-    public String getExcercise() {
-        return excercise;
+    public String getExercise() {
+        return exercise;
     }
 
-    public void setExcercise(String excercise) {
-        this.excercise = excercise;
+    public void setExercise(String exercise) {
+        this.exercise = exercise;
     }
 
     public double getWeight() {
@@ -73,11 +71,11 @@ public class Gymlog {
         this.reps = reps;
     }
 
-    public LocalDate getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
-    public void setDate(LocalDate date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 }

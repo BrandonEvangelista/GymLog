@@ -1,9 +1,9 @@
-package com.example.gymlogpractice.Database;
+package com.example.gymlogpractice.database;
 
 import android.app.Application;
 import android.util.Log;
 
-import com.example.gymlogpractice.Database.entities.Gymlog;
+import com.example.gymlogpractice.database.entities.Gymlog;
 import com.example.gymlogpractice.MainActivity;
 
 import java.util.ArrayList;
@@ -19,14 +19,14 @@ public class GymLogRepository {
     public GymLogRepository(Application application){
         GymLogDatabase db = GymLogDatabase.getDatabase(application);
         this.gymLogDAO = db.gymLogDao();
-        this.allLogs = this.gymLogDAO.getAllRecords();
+        this.allLogs = (ArrayList<Gymlog>) this.gymLogDAO.getAllRecords();
     }
 
     public ArrayList<Gymlog> getAllLogs(){
         Future<ArrayList<Gymlog>> future = GymLogDatabase.databaseWriteExecutor.submit(new Callable<ArrayList<Gymlog>>() {
             @Override
             public ArrayList<Gymlog> call() throws Exception {
-                return gymLogDAO.getAllRecords();
+                return (ArrayList<Gymlog>) gymLogDAO.getAllRecords();
             }
         }
 

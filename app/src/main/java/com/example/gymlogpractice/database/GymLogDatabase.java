@@ -1,4 +1,4 @@
-package com.example.gymlogpractice.Database;
+package com.example.gymlogpractice.database;
 
 import android.content.Context;
 import android.util.Log;
@@ -7,14 +7,17 @@ import androidx.annotation.NonNull;
 import androidx.room.Database;
 import androidx.room.Room;
 import androidx.room.RoomDatabase;
+import androidx.room.TypeConverters;
 import androidx.sqlite.db.SupportSQLiteDatabase;
 
-import com.example.gymlogpractice.Database.entities.Gymlog;
+import com.example.gymlogpractice.database.entities.Gymlog;
 import com.example.gymlogpractice.MainActivity;
+import com.example.gymlogpractice.database.typeConverters.LocalDateTypeConverter;
 
+import java.time.LocalDateTime;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
+@TypeConverters(LocalDateTypeConverter.class)
 @Database(entities = {Gymlog.class}, version = 1, exportSchema = false)
 public abstract class GymLogDatabase extends RoomDatabase {
     private static final String DATABASE_NAME = "GymLog_database";
@@ -54,15 +57,16 @@ public abstract class GymLogDatabase extends RoomDatabase {
            //good practice to put in dummy data
             ///
             ///
-            databaseWriteExecutor.execute(() -> {
-                GymLogDAO dao = INSTANCE.gymLogDAO();
-                dao.insert(new Gymlog("Bench Press", 225, 5));
-                dao.insert(new Gymlog("Squat", 315, 5));
-                dao.insert(new Gymlog("Deadlift", 405, 5));
-            });
+//            databaseWriteExecutor.execute(() -> {
+//                GymLogDAO dao = INSTANCE.gymLogDAO();
+//                dao.insert(new Gymlog("Bench Press", 225, 5));
+//                dao.insert(new Gymlog("Squat", 315, 5));
+//                dao.insert(new Gymlog("Deadlift", 405, 5));
+//            });
         }
     };
 
-    public abstract GymLogDAO gymLogDao() {
-    }
+    public  GymLogDAO gymLogDao() {
+        return null;
+    };
 }
