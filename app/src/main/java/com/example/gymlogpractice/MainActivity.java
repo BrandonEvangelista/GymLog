@@ -12,13 +12,18 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
+import com.example.gymlogpractice.database.GymLogRepository;
+import com.example.gymlogpractice.database.entities.Gymlog;
 import com.example.gymlogpractice.databinding.ActivityMainBinding;
 
 import java.util.Locale;
 
 public class MainActivity extends AppCompatActivity {
 
-    ActivityMainBinding binding;
+
+    private ActivityMainBinding binding;
+
+    private GymLogRepository repository;
 
     public static final String TAG = "GYMLOG";
 
@@ -35,6 +40,8 @@ public class MainActivity extends AppCompatActivity {
         binding = ActivityMainBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
 
+        repository = new GymLogRepository(getApplication());
+
         binding.logDisplayTextView.setMovementMethod(new ScrollingMovementMethod());
 
         binding.logButton.setOnClickListener(new View.OnClickListener() {
@@ -43,9 +50,16 @@ public class MainActivity extends AppCompatActivity {
                // Toast.makeText(MainActivity.this, "IT WORKED", Toast.LENGTH_SHORT).show();
                // Log.d("MainActivity", "Log button clicked");
                 getInformationFromDisplay();
+                insertGymlogRecord();
                 updateDisplay();
             }
         });
+
+    }
+
+    private void insertGymlogRecord(){
+        Gymlog log = new Gymlog(mExercise, mWeight, mReps);
+        repository.insertGymLog(log);
 
     }
     private void updateDisplay(){
